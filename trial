@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdlib.h>
+/**
+ * test for specifier b
+ */
+int _putchar(char c)
+{
+    return(write(1, &c, 1));
+}
+int _printf(const char *format, ...)
+{
+    int i, ind = 0, count = 0,j, rem;
+    int array[20];
+    va_list args;
+
+    va_start(args, format);
+    for (i = 0; format[i] != '\0'; i++)
+    {
+        if (format[i] == '%' && format[i + 1] == 'b')
+        {
+            i++;
+            j = va_arg(args, int);
+            while ( j / 2 > 0)
+            {
+                if (j == 1)
+                {
+                    rem = 1;
+                    break;
+                }
+                rem = j % 2;
+                j = j / 2;
+                array[20] = rem;
+            }
+            while(ind < 20)
+            {
+                _putchar(array[ind] + '0');
+                count++;
+                ind++;
+            }
+        }
+    }
+        return (count);
+}
+int main() {
+     _printf("%b\n", 98);
+    return (0);
+}
