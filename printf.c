@@ -33,7 +33,7 @@ int _printf(const char *format, ...)
 			ind++;
 			str = va_arg(args, char*);
 			if (*str == '\0')
-				str = "(nil)";
+				str = "(null)";
 			while (*str)
 			{
 				write(1, &(*str), 1);
