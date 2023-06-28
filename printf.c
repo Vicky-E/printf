@@ -1,4 +1,5 @@
 #include "main.h"
+void print_buffer(char b[], int *b_ind);
 /**
  * _printf - prints output according to a format
  * @format: character string
@@ -6,8 +7,8 @@
  */
 int _printf(const char *format, ...)
 {
-	char ch, *str;
-	int ind, count = 0;
+	char ch, *str, b[BUFFER];
+	int ind, count = 0, b_ind;
 	va_list args;
 
 	va_start(args, format);
@@ -36,7 +37,9 @@ int _printf(const char *format, ...)
 				str = "(null)";
 			while (*str)
 			{
-				write(1, &(*str), 1);
+				b[b_ind++] = *str;
+				if (b_ind <= BUFFER)
+					print_buffer(b, &b_ind);
 				str++;
 				count++;
 			}
@@ -45,9 +48,22 @@ int _printf(const char *format, ...)
 		{
 			if (format[ind] == '%' && format[ind + 1] == '\0')
 				return (-1);
-			write(1, &format[ind], 1);
+			b[b_ind++] = format[ind];
+			if (b_ind <= BUFFER)
+				print_buffer(b, &b_ind);
 			count++;
 		}
 	}
 	return (count);
+}
+/**
+ * print_buffer - prints with description
+ * @b: array
+ * @b_ind: buffer index
+ */
+void print_buffer(char b[], int *b_ind)
+{
+	if (*b_ind > 0)
+		write(1, &b[0], *b_ind);
+	*b_ind = 0;
 }

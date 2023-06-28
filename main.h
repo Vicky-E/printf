@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#define BUFFER 1024
 int _printf(const char *format, ...);
 
 int (*check_specifier(const char *specifier))(va_list);
