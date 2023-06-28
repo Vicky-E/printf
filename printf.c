@@ -36,7 +36,7 @@ int _printf(const char *format, ...)
 				str = "(nil)";
 			while (*str)
 			{
-				write(1, &str, 1);
+				write(1, &(*str), 1);
 				str++;
 				count++;
 			}
