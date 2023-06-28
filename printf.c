@@ -32,6 +32,8 @@ int _printf(const char *format, ...)
 		{
 			ind++;
 			str = va_arg(args, char*);
+			if (*str == '\0')
+				str = "(nil)";
 			while (*str)
 			{
 				write(1, &str, 1);
@@ -41,6 +43,8 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
+			if (format[ind] == '%' && format[ind + 1] == '\0')
+				return (-1);
 			write(1, &format[ind], 1);
 			count++;
 		}
