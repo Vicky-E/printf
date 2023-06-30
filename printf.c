@@ -45,7 +45,6 @@ int _printf(const char *format, ...)
 				count++;
 			}
 		}
-	}
 		else if (format[ind] == '%' && format[ind + 1] == 'b')
 		{
 			ind++;
@@ -90,7 +89,6 @@ int _printf(const char *format, ...)
 	}
 	return (count);
 }
-
 /**
  * print_buffer - prints with description
  * @b: array
