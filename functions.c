@@ -143,46 +143,42 @@ int print_int(va_list types, char buffer[],
 
 /************************* PRINT BINARY *************************/
 /**
- * print_binary - Prints an unsigned number
- * @types: argument list
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: get width.
- * @precision: Precision specification
- * @size: Size specifier
- * Return: Numbers of char printed.
+ * print_binary_helper - Helper function that converts unsigned integer.
+ * @num: The integer
+ *
+ * Return: Number of printed characters
  */
-int print_binary(va_list types, char buffer[],
-	int flags, int width, int precision, int size)
+
+int print_binary_helper(unsigned int num)
 {
-	unsigned int n, m, i, sum;
-	unsigned int a[32];
-	int count;
+	unsigned int character_count = 0;
 
-	UNUSED(buffer);
-	UNUSED(flags);
-	UNUSED(width);
-	UNUSED(precision);
-	UNUSED(size);
-
-	n = va_arg(types, unsigned int);
-	m = 2147483648; /* (2 ^ 31) */
-	a[0] = n / m;
-	for (i = 1; i < 32; i++)
+	if (num >= 2)
 	{
-		m /= 2;
-		a[i] = (n / m) % 2;
+		character_count += print_binary_helper(num / 2);
 	}
-	for (i = 0, sum = 0, count = 0; i < 32; i++)
-	{
-		sum += a[i];
-		if (sum || i == 31)
-		{
-			char z = '0' + a[i];
+	_putchar((num % 2) + '0');
+	character_count++;
+	return (character_count);
+}
 
-			write(1, &z, 1);
-			count++;
-		}
+/**
+ * print_binary - function to print converted binary.
+ * @args: Variable argument list.
+ *
+ * Return: Number of characters printed.
+ */
+
+int print_binary(va_list args)
+{
+	unsigned int character_count = 0;
+	unsigned int num = va_args(args, unsigned int);
+
+	if (num >= 2)
+	{
+		character_count += print_binary_helper(num / 2);
 	}
-	return (count);
+	_putchar((num % 2) + '0');
+	character_count++;
+	return (character_count);
 }
