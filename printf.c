@@ -90,6 +90,7 @@ int _printf(const char *format, ...)
 	}
 	return (count);
 }
+
 /**
  * print_buffer - prints with description
  * @b: array
