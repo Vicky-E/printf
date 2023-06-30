@@ -45,29 +45,7 @@ int _printf(const char *format, ...)
 				count++;
 			}
 		}
-		else if (format[ind] == '%' && format[ind + 1] == 'd')
-		{
-			ind++;
-			n = va_arg(args, long int*);
-                        if (n == 0)
-                                buffer[i--] = '0';
-			buffer[BUFF_SIZE - 1] = '\0';
-			num = (unsigned long int)n;
-			if (n < 0)
-			{
-				num = (unsigned long int)((-1) * n);
-				is_negative = 1;
-			}
-			while (num > 0)
-			{
-				buffer[i--] = (num % 10) + '0';
-				num /= 10;
-			}
-			b[b_ind++] = format[ind];
-                        if (b_ind <= BUFFER)
-                                print_buffer(b, &b_ind);
-                        count++;
-                }
+	}
 		else if (format[ind] == '%' && format[ind + 1] == 'b')
 		{
 			ind++;
