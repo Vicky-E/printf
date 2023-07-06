@@ -1,6 +1,7 @@
 #include "main.h"
 void print_buffer(char b[], int *b_ind);
 void pbuffer(char b[], int *b_ind);
+void p_buffer(char b[], int *b_ind);
 /**
  * _printf - prints output according to a format
  * @format: character string
@@ -97,7 +98,7 @@ int _printf(const char *format, ...)
 					i++;
 				}
 			}
-			pbuffer(b, &b_ind);
+			p_buffer(b, &b_ind);
 		}
 		else if (format[ind] == '%' && (format[ind + 1] == 'd'
 					|| format[ind + 1] == 'i'))
@@ -170,6 +171,14 @@ void pbuffer(char b[], int *b_ind)
 		{
 			write(1, &b[i], 1);
 		}
+		*b_ind = 0;
+	}
+}
+void p_buffer(char b[], int *b_ind)
+{
+	if (*b_ind > 0)
+	{
+		write(1, b, *b_ind);
 		*b_ind = 0;
 	}
 }
