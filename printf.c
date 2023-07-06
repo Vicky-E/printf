@@ -77,8 +77,9 @@ int _printf(const char *format, ...)
 			}
 			while (i >= 0)
 			{
-				bin = a[i] + '0';
-				write(1, &bin, 1);
+				b[b_ind++] = a[i] + '0';
+				if (b_ind <= BUFFER)
+					print_buffer(b, &b_ind);
 				i--;
 			}
 		}
