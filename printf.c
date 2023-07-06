@@ -8,8 +8,8 @@ void print_buffer(char b[], int *b_ind);
 int _printf(const char *format, ...)
 {
 	char ch, *str, b[BUFFER], bin;
-	int ind, i = 0, count = 0, b_ind = 0;
-	unsigned int a[32], num, rem;
+	int ind, count = 0, b_ind = 0;
+	unsigned int a[32], num, rem, i = 0;
 	va_list args;
 
 	va_start(args, format);
