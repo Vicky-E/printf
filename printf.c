@@ -45,26 +45,36 @@ int _printf(const char *format, ...)
 				count++;
 			}
 		}
-		else if (format[ind] == '%' && format[ind + 1] == 'b')
+		else if (format[ind] == '%' && (format[ind + 1] == 'b' ||
+					format[ind + 1] == 'u'))
 		{
 			ind++;
 			num = va_arg(args, unsigned int);
 			if (num == '\0')
 				return (-1);
-			while (num != 0 && i < 32)
+			if (num == 0)
 			{
-				if (num < 2)
-				{
-					rem = 1;
-					a[i] = rem;
-					count++;
-					break;
-				}
-				rem = num % 2;
-				a[i] = rem;
-				num = num / 2;
+				bin = '0';
+				write(1, &bin, 1);
 				count++;
-				i++;
+			}
+			else
+			{
+				while (num != 0 && i < 32)
+				{
+					if (num < 2)
+					{
+						rem = 1;
+						a[i] = rem;
+						count++;
+						break;
+					}
+					rem = num % 2;
+					a[i] = rem;
+					num = num / 2;
+					count++;
+					i++;
+				}
 			}
 			while (i >= 0)
 			{
