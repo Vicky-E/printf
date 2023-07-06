@@ -11,6 +11,7 @@ int _printf(const char *format, ...)
 	char ch, *str, b[BUFFER], bin;
 	int ind, count = 0, i = 0, b_ind = 0, is_negative;
 	unsigned int a[32], rem, num;
+	int bit_size;
 	va_list args;
 
 	va_start(args, format);
@@ -78,6 +79,7 @@ int _printf(const char *format, ...)
 		{
 			ind++;
 			num = va_arg(args, unsigned int);
+			bit_size = sizeof(num) * 8;
 			if (num == '\0')
 				return (-1);
 			if (num == 0)
@@ -88,7 +90,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				while (num != 0 && i < 128)
+				while (num != 0 && i < bit_size)
 				{
 					if (num < 2)
 					{
