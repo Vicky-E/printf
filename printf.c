@@ -59,7 +59,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				while (num != 0 && i < 65536)
+				while (num != 0 && i < 128)
 				{
 					if (num < 2)
 					{
