@@ -59,7 +59,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				while (num != 0 && i < 256)
+				while (num != 0 && i < 1024)
 				{
 					if (num < 2)
 					{
