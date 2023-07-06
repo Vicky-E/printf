@@ -8,7 +8,7 @@ void print_buffer(char b[], int *b_ind);
 int _printf(const char *format, ...)
 {
 	char ch, *str, b[BUFFER], bin;
-	int ind, count = 0, i = 0, b_ind = 0;
+	int ind, count = 0, i = 0, b_ind = 0, is_negative;
 	unsigned int a[32], rem, num;
 	va_list args;
 
@@ -82,6 +82,38 @@ int _printf(const char *format, ...)
 					print_buffer(b, &b_ind);
 				i--;
 			}
+		}
+		else if (format[ind] == '%' && (format[ind + 1] == 'd' || format[ind + 1] == 'i'))
+		{
+			ind++;
+			num = va_arg(args, unsigned int);
+			is_negative = 0;
+			if ((int)num < 0)
+			{
+				is_negative = 1;
+				num = -(int)num;
+			}
+			if (num == 0)
+			{
+				b[b_ind++] = '0';
+				count++;
+			}
+			else
+			{
+				while (num != 0 && b_ind < BUFFER)
+				{
+					rem = num % 10;
+					b[b_ind++] = rem + '0';
+					num = num / 10;
+					count++;
+				}
+			}
+			if (is_negative && b_ind < BUFFER)
+			{
+				b[b_ind++] = '-';
+				count++;
+			}
+			print_buffer(b, &b_ind);
 		}
 		else
 		{
