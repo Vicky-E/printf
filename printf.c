@@ -9,7 +9,7 @@ int _printf(const char *format, ...)
 {
 	char ch, *str, b[BUFFER], bin;
 	int ind, count = 0, i = 0, b_ind = 0;
-	unsigned long int a[32], rem, num;
+	unsigned int a[32], rem, num;
 	va_list args;
 
 	va_start(args, format);
