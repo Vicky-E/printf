@@ -45,8 +45,7 @@ int _printf(const char *format, ...)
 				count++;
 			}
 		}
-		else if (format[ind] == '%' && (format[ind + 1] == 'b' ||
-					format[ind + 1] == 'u'))
+		else if (format[ind] == '%' && format[ind + 1] == 'u')
 		{
 			ind++;
 			num = va_arg(args, unsigned int);
