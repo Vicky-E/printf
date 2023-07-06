@@ -1,5 +1,6 @@
 #include "main.h"
 void print_buffer(char b[], int *b_ind);
+void pbuffer(char b[], int *b_ind);
 /**
  * _printf - prints output according to a format
  * @format: character string
@@ -83,7 +84,8 @@ int _printf(const char *format, ...)
 				i--;
 			}
 		}
-		else if (format[ind] == '%' && (format[ind + 1] == 'd' || format[ind + 1] == 'i'))
+		else if (format[ind] == '%' && (format[ind + 1] == 'd'
+					|| format[ind + 1] == 'i'))
 		{
 			ind++;
 			num = va_arg(args, unsigned int);
@@ -113,7 +115,7 @@ int _printf(const char *format, ...)
 				b[b_ind++] = '-';
 				count++;
 			}
-			print_buffer(b, &b_ind);
+			pbuffer(b, &b_ind);
 		}
 		else
 		{
@@ -137,4 +139,22 @@ void print_buffer(char b[], int *b_ind)
 	if (*b_ind > 0)
 		write(1, &b[0], *b_ind);
 	*b_ind = 0;
+}
+/**
+ * pbuffer - prints a format
+ * @b: array
+ * @b_ind: index
+ */
+void pbuffer(char b[], int *b_ind)
+{
+	int i;
+
+	if (*b_ind > 0)
+	{
+		for (i = *b_ind - 1; i >= 0; i--)
+		{
+			write(1, &b[i], *b_ind);
+		}
+		*b_ind = 0;
+	}
 }
