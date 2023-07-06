@@ -10,8 +10,8 @@ int _printf(const char *format, ...)
 {
 	char ch, *str, b[BUFFER], bin;
 	int ind, count = 0, i = 0, b_ind = 0, is_negative;
-	unsigned int a[32], rem, num;
-	int bit_size;
+	unsigned int rem, num;
+	int bit_l;
 	va_list args;
 
 	va_start(args, format);
@@ -79,7 +79,7 @@ int _printf(const char *format, ...)
 		{
 			ind++;
 			num = va_arg(args, unsigned int);
-			bit_size = sizeof(num) * 8;
+			bit_l = sizeof(num) * 8;
 			if (num == '\0')
 				return (-1);
 			if (num == 0)
@@ -90,29 +90,14 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				while (num != 0 && i < bit_size)
+				while (i < bit_l && b_ind < BUFFER)
 				{
-					if (num < 2)
-					{
-						rem = 1;
-						a[i] = rem;
-						count++;
-						break;
-					}
-					rem = num % 2;
-					a[i] = rem;
-					num = num / 2;
+					b[b_ind++] = ((num >> (bit_l - 1 - i)) & 1) + '0';
 					count++;
 					i++;
 				}
 			}
-			while (i >= 0)
-			{
-				b[b_ind++] = a[i] + '0';
-				if (b_ind <= BUFFER)
-					print_buffer(b, &b_ind);
-				i--;
-			}
+			pbuffer(b, &b_ind);
 		}
 		else if (format[ind] == '%' && (format[ind + 1] == 'd'
 					|| format[ind + 1] == 'i'))
