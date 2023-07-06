@@ -46,6 +46,34 @@ int _printf(const char *format, ...)
 				count++;
 			}
 		}
+		else if (format[ind] == '%' && format[ind + 1] == 'S')
+		{
+			ind++;
+			str = va_arg(args, char*);
+			if (str == NULL)
+				str = "(null)";
+			while (*str)
+			{
+				if (*str < ' ' || *str >= 127)
+				{
+					b[b_ind++] = '\\';
+					b[b_ind++] = 'x';
+					b[b_ind++] = (*str >> 4) < 10 ? (*str >> 4) + '0'
+						: (*str >> 4) + 'A' - 10;
+					b[b_ind++] = (*str & 0xF) < 10 ? (*str & 0xF) + '0'
+						: (*str & 0xF) + 'A' - 10;
+					count += 4;
+				}
+				else
+				{
+					b[b_ind++] = *str;
+					count++;
+				}
+				if (b_ind <= BUFFER)
+					print_buffer(b, &b_ind);
+				str++;
+			}
+		}
 		else if (format[ind] == '%' && format[ind + 1] == 'b')
 		{
 			ind++;
