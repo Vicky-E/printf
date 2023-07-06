@@ -49,8 +49,6 @@ int _printf(const char *format, ...)
 		{
 			ind++;
 			num = va_arg(args, unsigned int);
-			if (num == 0)
-				a[i] = 0;
 			if (num == '\0')
 				return (-1);
 			while (num != 0 && i < 32)
