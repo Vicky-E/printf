@@ -59,7 +59,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				while (num != 0 && i < 32)
+				while (num != 0 && i < 64)
 				{
 					if (num < 2)
 					{
