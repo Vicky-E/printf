@@ -153,7 +153,7 @@ void pbuffer(char b[], int *b_ind)
 	{
 		for (i = *b_ind - 1; i >= 0; i--)
 		{
-			write(1, &b[i], *b_ind);
+			write(1, &b[i], 1);
 		}
 		*b_ind = 0;
 	}
