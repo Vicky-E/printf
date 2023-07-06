@@ -9,7 +9,7 @@ void p_buffer(char b[], int *b_ind);
  */
 int _printf(const char *format, ...)
 {
-	char ch, *str, b[BUFFER], bin;
+	char ch, *str, b[BUFFER];
 	int ind, count = 0, i = 0, b_ind = 0, is_negative;
 	unsigned int rem, num;
 	int bit_l;
@@ -85,8 +85,7 @@ int _printf(const char *format, ...)
 				return (-1);
 			if (num == 0)
 			{
-				bin = '0';
-				write(1, &bin, 1);
+				b[b_ind++] = '0';
 				count++;
 			}
 			else
